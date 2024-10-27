@@ -1,28 +1,28 @@
 use std::io;
 
 fn main() {
-    println!("Gib eine Dezimalzahl ein, die in Binär umgewandelt werden soll:");
+    println!("Enter a decimal number to convert to binary:");
 
-    // Eingabe der Zahl vom Benutzer
+    // Get user input
     let mut input = String::new();
-    io::stdin().read_line(&mut input).expect("Fehler beim Einlesen der Zahl");
-    let number: u32 = input.trim().parse().expect("Bitte gib eine gültige Ganzzahl ein");
+    io::stdin().read_line(&mut input).expect("Failed to read input");
+    let number: u32 = input.trim().parse().expect("Please enter a valid integer");
 
-    // Zerlegung der Zahl in Binärdarstellung
+    // Convert the number to binary representation
     let mut binary_representation = String::new();
 
-    // Wir beginnen bei 2^7 für ein 8-Bit-Ergebnis (um die Struktur zu verdeutlichen),
-    // dies kann jedoch für größere Bitzahlen angepasst werden.
-    let mut rest = number;
+    // Starting from 2^7 for an 8-bit result (for illustration purposes),
+    // but this can be adjusted for more bits if needed.
+    let mut remainder = number;
     for i in (0..8).rev() {
-        let power_of_two = 1 << i; // entspricht 2^i
-        if rest >= power_of_two {
+        let power_of_two = 1 << i; // equivalent to 2^i
+        if remainder >= power_of_two {
             binary_representation.push('1');
-            rest -= power_of_two;
+            remainder -= power_of_two;
         } else {
             binary_representation.push('0');
         }
     }
 
-    println!("Die Binärdarstellung von {} ist: {}", number, binary_representation);
+    println!("The binary representation of {} is: {}", number, binary_representation);
 }
